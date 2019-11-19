@@ -44,9 +44,9 @@ SearchResultsMessage.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  query: state.selectorReducer.search.query,
-  totalResults: state.selectorReducer.search.totalResults,
-  startOfRange: state.selectorReducer.search.startOfRange,
+  query: state.selectorReducer.present.search.query,
+  totalResults: state.selectorReducer.present.search.totalResults,
+  startOfRange: state.selectorReducer.present.search.startOfRange,
 })
 
 export default connect(mapStateToProps, null)(SearchResultsMessage)

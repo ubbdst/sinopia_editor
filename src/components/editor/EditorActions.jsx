@@ -5,6 +5,8 @@ import CopyToNewButton from './actions/CopyToNewButton'
 import PreviewButton from './actions/PreviewButton'
 import CloseButton from './actions/CloseButton'
 import SaveAndPublishButton from './actions/SaveAndPublishButton'
+import UndoButton from './actions/UndoButton'
+import RedoButton from './actions/RedoButton'
 
 const EditorActions = () => (
   <div className="row">
@@ -12,6 +14,8 @@ const EditorActions = () => (
       <CopyToNewButton />
       <PreviewButton />
       <CloseButton />
+      <UndoButton />
+      <RedoButton />
       <SaveAndPublishButton class="editor-save" />
     </section>
   </div>

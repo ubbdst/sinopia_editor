@@ -96,7 +96,7 @@ InputLang.propTypes = {
 }
 
 const mapStateToProps = (state, ourProps) => {
-  const languages = state.selectorReducer.entities.languages
+  const languages = state.selectorReducer.present.entities.languages
   const textValue = findNode(state, ourProps.reduxPath).content
   const show = modalType(state) === `LanguageModal-${ourProps.reduxPath.join()}`
   return {

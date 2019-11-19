@@ -2,7 +2,7 @@
 import GraphBuilder from 'GraphBuilder'
 import { generateMD5 } from 'Utilities'
 
-export const currentResourceKey = state => state.selectorReducer.editor.currentResource
+export const currentResourceKey = state => state.selectorReducer.present.editor.currentResource
 
 /**
  * Find a resource.
@@ -10,7 +10,7 @@ export const currentResourceKey = state => state.selectorReducer.editor.currentR
  * @param {string} resourceKey of the resource to check; if omitted, current resource key is used
  * @return {Object} the resource or undefined
  */
-export const findResource = (state, resourceKey) => state.selectorReducer.entities.resources[resourceKey || currentResourceKey(state)]
+export const findResource = (state, resourceKey) => state.selectorReducer.present.entities.resources[resourceKey || currentResourceKey(state)]
 
 /**
  * Finds the resource URI for a resource.
@@ -43,14 +43,14 @@ export const rootResourceTemplateId = (state, resourceKey) => {
  */
 export const hasResource = state => findResource(state) !== undefined
 
-export const findNode = (state, reduxPath) => findObjectAtPath(state.selectorReducer, reduxPath)
+export const findNode = (state, reduxPath) => findObjectAtPath(state.selectorReducer.present, reduxPath)
 
 export const findObjectAtPath = (parent, path) => path.reduce((obj, key) => obj?.[key], parent) || {}
 
 export const isExpanded = (state, reduxPath) => [...reduxPath, 'expanded']
-  .reduce((obj, key) => (typeof obj[key] !== 'undefined' ? obj[key] : false), state.selectorReducer.editor.expanded)
+  .reduce((obj, key) => (typeof obj[key] !== 'undefined' ? obj[key] : false), state.selectorReducer.present.editor.expanded)
 
-const resourceValidation = state => state.selectorReducer.editor.resourceValidation
+const resourceValidation = state => state.selectorReducer.present.editor.resourceValidation
 
 /**
  * @returns {function} a function that returns all of the validation errors for the redux path
@@ -76,7 +76,7 @@ export const getDisplayResourceValidations = (state, resourceKey) => resourceVal
 /**
  * @returns {function} a function that returns the errors for an error key
  */
-export const findErrors = (state, errorKey) => state.selectorReducer.editor.errors[errorKey] || []
+export const findErrors = (state, errorKey) => state.selectorReducer.present.editor.errors[errorKey] || []
 
 /**
  * Get a list of selections that have been made for the given reduxPath
@@ -117,11 +117,11 @@ export const getPropertyTemplate = (state, resourceTemplateId, propertyURI) => {
  */
 export const resourceHasChangesSinceLastSave = (state, resourceKey) => {
   const thisResourceKey = resourceKey || currentResourceKey(state)
-  const lastSaveChecksum = state.selectorReducer?.editor?.lastSaveChecksum[thisResourceKey]
+  const lastSaveChecksum = state.selectorReducer.present.editor?.lastSaveChecksum[thisResourceKey]
   if (lastSaveChecksum === undefined) {
     return true
   }
-  const rdf = new GraphBuilder(state.selectorReducer.entities.resources[thisResourceKey], state.selectorReducer.entities.resourceTemplates).graph.toCanonical()
+  const rdf = new GraphBuilder(state.selectorReducer.present.entities.resources[thisResourceKey], state.selectorReducer.present.entities.resourceTemplates).graph.toCanonical()
   const resourceChecksum = generateMD5(rdf)
   return lastSaveChecksum !== resourceChecksum
 }

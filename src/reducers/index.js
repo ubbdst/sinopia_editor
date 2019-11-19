@@ -1,6 +1,8 @@
 // Copyright 2018, 2019 Stanford University see LICENSE for license
 
 import { combineReducers } from 'redux'
+import undoable, { includeAction, excludeAction } from 'redux-undo'
+
 import authenticate from './authenticate'
 import {
   removeMyItem, setItemsOrSelections, setBaseURL, setMyItemsLang,
@@ -229,7 +231,7 @@ export const createReducer = handlers => (state = {}, action) => {
 
 const appReducer = combineReducers({
   authenticate,
-  selectorReducer: createReducer(handlers),
+  selectorReducer: undoable(createReducer(handlers)),
 })
 
 export default appReducer

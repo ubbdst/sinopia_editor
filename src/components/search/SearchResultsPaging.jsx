@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const SearchResultsPaging = (props) => {
-  const totalResults = useSelector(state => state.selectorReducer.search.totalResults)
-  const resultsPerPage = useSelector(state => state.selectorReducer.search.resultsPerPage)
+  const totalResults = useSelector(state => state.selectorReducer.present.search.totalResults)
+  const resultsPerPage = useSelector(state => state.selectorReducer.present.search.resultsPerPage)
 
-  const startOfRange = useSelector(state => state.selectorReducer.search.startOfRange)
+  const startOfRange = useSelector(state => state.selectorReducer.present.search.startOfRange)
   const currentPage = Math.ceil((startOfRange + 1) / resultsPerPage)
 
   const changePage = (page) => {

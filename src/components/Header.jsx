@@ -57,7 +57,7 @@ Header.propTypes = {
 const mapStateToProps = (state) => {
   const hasResource = hasResourceSelector(state)
   return {
-    version: state.selectorReducer.appVersion.version,
+    version: state.selectorReducer.present.appVersion.version,
     hasResource,
   }
 }

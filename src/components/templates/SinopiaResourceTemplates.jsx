@@ -17,8 +17,8 @@ export const newResourceErrorKey = 'newresource'
  */
 const SinopiaResourceTemplates = (props) => {
   const dispatch = useDispatch()
-  const searchResults = useSelector(state => state.selectorReducer.templateSearch)
-  const historicallyUsedTemplates = useSelector(state => state.selectorReducer.historicalTemplates)
+  const searchResults = useSelector(state => state.selectorReducer.present.templateSearch)
+  const historicallyUsedTemplates = useSelector(state => state.selectorReducer.present.historicalTemplates)
 
   const errors = useSelector(state => findErrors(state, newResourceErrorKey))
   const rootResource = useSelector(state => findResource(state))

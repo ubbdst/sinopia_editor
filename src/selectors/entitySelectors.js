@@ -1,6 +1,6 @@
 // Copyright 2019 Stanford University see LICENSE for license
 
-export const findResourceTemplate = (state, resourceTemplateId) => state.selectorReducer
+export const findResourceTemplate = (state, resourceTemplateId) => state.selectorReducer.present
   .entities.resourceTemplates[resourceTemplateId]
 
 /**
@@ -10,7 +10,7 @@ export const findResourceTemplate = (state, resourceTemplateId) => state.selecto
  * @return [string] the label of the language or an empty string
  */
 export const languageLabel = (state, languageId) => {
-  const lang = state.selectorReducer.entities.languages.options.find(lang => lang.id === languageId)
+  const lang = state.selectorReducer.present.entities.languages.options.find(lang => lang.id === languageId)
   return lang ? lang.label : ''
 }
 
@@ -20,4 +20,4 @@ export const languageLabel = (state, languageId) => {
  * @param [string] URI of the lookup
  * @return [Object] the lookup if found
  */
-export const findLookup = (state, uri) => state.selectorReducer.entities.lookups[uri]
+export const findLookup = (state, uri) => state.selectorReducer.present.entities.lookups[uri]

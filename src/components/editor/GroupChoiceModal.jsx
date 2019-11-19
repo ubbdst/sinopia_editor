@@ -98,7 +98,7 @@ GroupChoiceModal.propTypes = {
 const mapStateToProps = state => ({
   show: modalType(state) === 'GroupChoiceModal',
   currentUser: getCurrentUser(state),
-  resourceKey: state.selectorReducer.editor.currentResource,
+  resourceKey: state.selectorReducer.present.editor.currentResource,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ publishResource, hideModal }, dispatch)

@@ -17,7 +17,7 @@ const TemplateSearch = () => {
     })
   }, [dispatch])
 
-  const error = useSelector(state => state.selectorReducer.templateSearch.error)
+  const error = useSelector(state => state.selectorReducer.present.templateSearch.error)
 
   const search = (query) => {
     // Cancel all current searches

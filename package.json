@@ -103,6 +103,7 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "redux-undo": "^1.0.0-beta9-9-7",
     "request": "^2.88.0",
     "reselect": "^4.0.0",
     "set-value": ">=2.0.1",

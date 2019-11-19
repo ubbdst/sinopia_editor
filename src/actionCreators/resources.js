@@ -25,7 +25,7 @@ import _ from 'lodash'
 export const update = (resourceKey, currentUser, errorKey) => (dispatch, getState) => {
   const state = getState()
   const uri = findResourceURI(state, resourceKey)
-  const rdf = new GraphBuilder(state.selectorReducer.entities.resources[resourceKey], state.selectorReducer.entities.resourceTemplates).graph.toCanonical()
+  const rdf = new GraphBuilder(state.selectorReducer.present.entities.resources[resourceKey], state.selectorReducer.present.entities.resourceTemplates).graph.toCanonical()
   return updateRDFResource(currentUser, uri, rdf)
     .then(() => dispatch(saveResourceFinished(resourceKey, generateMD5(rdf))))
     .catch(err => dispatch(appendError(errorKey, `Error saving ${uri}: ${err.toString()}`)))
@@ -81,7 +81,7 @@ export const retrieveResource = (currentUser, uri, errorKey, asNewResource) => (
 export const publishResource = (resourceKey, currentUser, group, errorKey) => (dispatch, getState) => {
   // Make a copy of state to prevent changes that will affect the publish.
   const state = _.cloneDeep(getState())
-  const rdf = new GraphBuilder(state.selectorReducer.entities.resources[resourceKey], state.selectorReducer.entities.resourceTemplates).graph.toCanonical()
+  const rdf = new GraphBuilder(state.selectorReducer.present.entities.resources[resourceKey], state.selectorReducer.present.entities.resourceTemplates).graph.toCanonical()
 
   return publishRDFResource(currentUser, rdf, group).then((result) => {
     const resourceUrl = result.response.headers.location
@@ -134,7 +134,7 @@ export const expandResource = (reduxPath, errorKey) => (dispatch, getState) => {
   const state = getState()
   const resourceTemplateId = reduxPath.slice(-2)[0]
   const propertyURI = reduxPath.slice(-1)[0]
-  const resourceTemplates = state.selectorReducer.entities.resourceTemplates
+  const resourceTemplates = state.selectorReducer.present.entities.resourceTemplates
   const parentKeyReduxPath = reduxPath.slice(0, reduxPath.length - 2)
   dispatch(stubResourceProperties(resourceTemplateId, resourceTemplates, {}, parentKeyReduxPath, true, false, propertyURI, errorKey))
     .then((result) => {
@@ -149,7 +149,7 @@ export const expandResource = (reduxPath, errorKey) => (dispatch, getState) => {
 export const addResource = (reduxPath, errorKey) => (dispatch, getState) => {
   const state = getState()
   const resourceTemplateId = reduxPath.slice(-1)[0]
-  const resourceTemplates = state.selectorReducer.entities.resourceTemplates
+  const resourceTemplates = state.selectorReducer.present.entities.resourceTemplates
   const key = shortid.generate()
   const parentReduxPath = reduxPath.slice(0, reduxPath.length - 2)
   const newKeyReduxPath = [...parentReduxPath, key]

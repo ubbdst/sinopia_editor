@@ -24,13 +24,13 @@ const Search = (props) => {
   const dispatch = useDispatch()
   const fetchQASearchResults = (queryString, uri) => dispatch(fetchQASearchResultsCreator(queryString, uri))
 
-  const resultsPerPage = useSelector(state => state.selectorReducer.search.resultsPerPage)
+  const resultsPerPage = useSelector(state => state.selectorReducer.present.search.resultsPerPage)
   const fetchSinopiaSearchResults = (queryString, startOfRange) => dispatch(fetchSinopiaSearchResultsCreator(queryString, startOfRange, resultsPerPage))
 
   const clearSearchResults = useCallback(() => dispatch(clearSearchResultsAction()), [dispatch])
 
-  const error = useSelector(state => state.selectorReducer.search.error)
-  const searchUri = useSelector(state => state.selectorReducer.search.uri)
+  const error = useSelector(state => state.selectorReducer.present.search.error)
+  const searchUri = useSelector(state => state.selectorReducer.present.search.uri)
 
   const topRef = useRef(null)
 

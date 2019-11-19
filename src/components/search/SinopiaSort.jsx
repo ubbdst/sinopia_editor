@@ -5,10 +5,10 @@ import { fetchSinopiaSearchResults } from 'actionCreators/search'
 
 
 const SinopiaSort = () => {
-  const query = useSelector(state => state.selectorReducer.search.query)
-  const resultsPerPage = useSelector(state => state.selectorReducer.search.resultsPerPage)
-  const curSortField = useSelector(state => state.selectorReducer.search.sortField)
-  const curSortOrder = useSelector(state => state.selectorReducer.search.sortOrder)
+  const query = useSelector(state => state.selectorReducer.present.search.query)
+  const resultsPerPage = useSelector(state => state.selectorReducer.present.search.resultsPerPage)
+  const curSortField = useSelector(state => state.selectorReducer.present.search.sortField)
+  const curSortOrder = useSelector(state => state.selectorReducer.present.search.sortOrder)
 
   const dispatch = useDispatch()
   const handleSort = (sortField, sortOrder) => dispatch(fetchSinopiaSearchResults(query, 0, resultsPerPage, sortField, sortOrder))

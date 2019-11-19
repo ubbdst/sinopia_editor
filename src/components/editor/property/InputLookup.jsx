@@ -12,7 +12,6 @@ import { booleanPropertyFromTemplate } from 'utilities/propertyTemplates'
 import _ from 'lodash'
 import { renderMenuFunc, renderTokenFunc } from './renderTypeaheadFunctions'
 
-
 const AsyncTypeahead = asyncContainer(Typeahead)
 
 const InputLookup = (props) => {

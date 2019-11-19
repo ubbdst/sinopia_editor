@@ -3,7 +3,7 @@
 import { loadingLanguages, languagesReceived } from 'actions/entities'
 
 const loadLanguages = () => (dispatch, getState) => {
-  if (getState().selectorReducer.entities.languages.options.length > 0) {
+  if (getState().selectorReducer.present.entities.languages.options.length > 0) {
     return // Languages already loaded
   }
 

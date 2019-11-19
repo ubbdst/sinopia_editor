@@ -132,7 +132,7 @@ SinopiaSearchResults.propTypes = {
 
 const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
-  searchResults: state.selectorReducer.search.results,
+  searchResults: state.selectorReducer.present.search.results,
   rootResource: findResource(state),
   errors: findErrors(state, searchRetrieveErrorKey),
 })

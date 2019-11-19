@@ -18,8 +18,8 @@ export const searchQARetrieveErrorKey = 'searchqaresource'
 const QASearchResults = (props) => {
   const dispatch = useDispatch()
 
-  const searchResults = useSelector(state => state.selectorReducer.search.results)
-  const searchUri = useSelector(state => state.selectorReducer.search.uri)
+  const searchResults = useSelector(state => state.selectorReducer.present.search.results)
+  const searchUri = useSelector(state => state.selectorReducer.present.search.uri)
 
   const [resourceURI, setResourceURI] = useState(null)
   // Resource ID is for handling non-LD QA authorities, e.g., Discog

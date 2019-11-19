@@ -13,7 +13,7 @@ const ResourcesNav = () => {
 
   const currentResourceKey = useSelector(state => currentResourceKeySelector(state))
 
-  const resourceKeys = useSelector(state => Object.keys(state.selectorReducer.entities.resources))
+  const resourceKeys = useSelector(state => Object.keys(state.selectorReducer.present.entities.resources))
 
   const navLabels = useSelector((state) => {
     const labels = {}
