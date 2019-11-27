@@ -151,9 +151,9 @@ describe('Utilities', () => {
       dataset.add(rdf.quad(rdf.namedNode(''),
         rdf.namedNode('http://sinopia.io/vocabulary/hasResourceTemplate'),
         rdf.literal('ld4p:RT:bf2:WorkTitle')))
-        dataset.add(rdf.quad(rdf.namedNode(''),
-          rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-          rdf.namedNode('http://id.loc.gov/ontologies/bibframe/Title')))
+      dataset.add(rdf.quad(rdf.namedNode(''),
+        rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+        rdf.namedNode('http://id.loc.gov/ontologies/bibframe/Title')))
       expect(turtleFromDataset(dataset)).toEqual(`<> <http://id.loc.gov/ontologies/bibframe/mainTitle> "foo"@eng;
     <http://sinopia.io/vocabulary/hasResourceTemplate> "ld4p:RT:bf2:WorkTitle";
     a <http://id.loc.gov/ontologies/bibframe/Title>.

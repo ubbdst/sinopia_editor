@@ -57,26 +57,15 @@ export const rdfDatasetFromN3 = data => new Promise((resolve, reject) => {
     })
 })
 
-export const turtleFromDataset = dataset => {
+export const turtleFromDataset = (dataset) => {
   const ttlParts = []
   const writableStream = new Stream.Writable()
   writableStream._write = (chunk, encoding, next) => {
-    // console.log(chunk.toString())
     ttlParts.push(chunk.toString())
     next()
   }
   const writer = new N3Writer(writableStream, { end: false })
-  // writer.addQuad(
-  //   rdf.namedNode('http://example.org/cartoons#Tom'),
-  //   rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-  //   rdf.namedNode('http://example.org/cartoons#Cat')
-  // )
   dataset.toArray().forEach(quad => writer.addQuad(quad))
-  // writer.addQuad(quad(
-  //   namedNode('http://example.org/cartoons#Tom'),
-  //   namedNode('http://example.org/cartoons#name'),
-  //   literal('Tom')
-  // ))
   writer.end()
   return ttlParts.join('')
 }
