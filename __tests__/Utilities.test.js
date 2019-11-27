@@ -5,7 +5,10 @@ import {
   resourceToName,
   rdfDatasetFromN3,
   groupName,
+  turtleFromDataset,
 } from '../src/Utilities'
+import rdf from 'rdf-ext'
+
 
 describe('Utilities', () => {
   describe('groupName()', () => {
@@ -134,9 +137,27 @@ describe('Utilities', () => {
       const dataset = await rdfDatasetFromN3(n3)
       expect(dataset.toArray().length).toEqual(3)
     })
+    it('raises an error for invalid N3', async () => {
+      await expect(rdfDatasetFromN3('foo')).rejects.toThrowError()
+    })
   })
 
-  it('raises an error for invalid N3', async () => {
-    await expect(rdfDatasetFromN3('foo')).rejects.toThrowError()
+  describe('turtleFromDataset()', () => {
+    it('produces turtle', () => {
+      const dataset = rdf.dataset()
+      dataset.add(rdf.quad(rdf.namedNode(''),
+        rdf.namedNode('http://id.loc.gov/ontologies/bibframe/mainTitle'),
+        rdf.literal('foo', 'eng')))
+      dataset.add(rdf.quad(rdf.namedNode(''),
+        rdf.namedNode('http://sinopia.io/vocabulary/hasResourceTemplate'),
+        rdf.literal('ld4p:RT:bf2:WorkTitle')))
+        dataset.add(rdf.quad(rdf.namedNode(''),
+          rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+          rdf.namedNode('http://id.loc.gov/ontologies/bibframe/Title')))
+      expect(turtleFromDataset(dataset)).toEqual(`<> <http://id.loc.gov/ontologies/bibframe/mainTitle> "foo"@eng;
+    <http://sinopia.io/vocabulary/hasResourceTemplate> "ld4p:RT:bf2:WorkTitle";
+    a <http://id.loc.gov/ontologies/bibframe/Title>.
+`)
+    })
   })
 })
